@@ -5,3 +5,11 @@ build website:
     - npm install -g gatsby-cli
     - gatsby build
     - ls -ltr
+  artifacts:
+    paths:
+      - ./public
+
+test artifact:
+  script:
+    - grep "Gatsby" ./public/index.html
+    - grep "daahhga"  ./public/index.html
