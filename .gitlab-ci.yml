@@ -2,6 +2,10 @@ stages:
   - build
   - test
   - deploy
+cache:
+    key: master
+    paths:
+      - node_modules
 build website:
   stage: build
   image: node
@@ -16,6 +20,7 @@ build website:
 
 test artifact:
   stage: test
+  cache: {}
   script:
     - grep "Gatsby" ./public/index.html
 #    - grep "daahhga" ./public/index.html
@@ -35,6 +40,7 @@ test website:
 deploy website:
   stage: deploy
   image: node
+  cache: {}
   script:
     - npm install --global surge
     - surge --project ./public --domain facezoneinsta.surge.sh
