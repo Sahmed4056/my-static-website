@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - deploy
 build website:
   stage: build
   image: node
@@ -28,3 +29,12 @@ test website:
     - gatsby serve &
     - sleep 30
     - curl http://localhost:9000
+
+
+# surge.sh is platform used to deploy the static code websites in serverless architecture
+deploy website:
+  stage: deploy
+  image: node
+  script:
+    - npm install --global surge
+    - surge --project ./public --domain facezoneinsta.surge.sh
